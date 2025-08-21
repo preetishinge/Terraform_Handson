@@ -19,3 +19,18 @@ output "instance_public_ip" {
   value = aws_instance.my_ec2.public_ip
 }
 
+terraform {
+  backend "s3" {
+    bucket  = "Preeti-bucket-for-training"
+    key     = "terraform/my_ec2.tfstate"
+    region  = "eu-west-2"
+    encrypt = true
+  }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
